@@ -81,7 +81,7 @@ class _AlphabetListViewState extends State<AlphabetListView> {
       _ => null,
     };
 
-    return Row(
+    /*return Row(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       textDirection: rowTextDirection,
       children: [
@@ -108,6 +108,27 @@ class _AlphabetListViewState extends State<AlphabetListView> {
           symbolChangeNotifierScrollbar: _symbolChangeNotifierScrollbar,
           symbolChangeNotifierList: _symbolChangeNotifierList,
         ),
+      ],
+    );*/
+    return Stack(
+      children: [
+        AlphabetList(
+          items: _sortedItems,
+          scrollController: _scrollController,
+          alphabetListOptions: widget.options.listOptions,
+          symbolChangeNotifierList: _symbolChangeNotifierList,
+          symbolChangeNotifierScrollbar: _symbolChangeNotifierScrollbar,
+        ),
+        AlphabetSymbolOverlay(
+          alphabetOverlayOptions: widget.options.overlayOptions,
+          symbolChangeNotifierScrollbar: _symbolChangeNotifierScrollbar,
+        ),
+        Positioned(right: 0, top: 0, bottom: 0, child: AlphabetScrollbar(
+          items: _sortedItems,
+          alphabetScrollbarOptions: widget.options.scrollbarOptions,
+          symbolChangeNotifierScrollbar: _symbolChangeNotifierScrollbar,
+          symbolChangeNotifierList: _symbolChangeNotifierList,
+        ),),
       ],
     );
   }
